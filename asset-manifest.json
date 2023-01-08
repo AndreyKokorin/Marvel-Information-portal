@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/Marvel-Information-portal/static/css/main.e8826a08.chunk.css",
+    "main.js": "/Marvel-Information-portal/static/js/main.d0d9940c.chunk.js",
+    "main.js.map": "/Marvel-Information-portal/static/js/main.d0d9940c.chunk.js.map",
+    "runtime-main.js": "/Marvel-Information-portal/static/js/runtime-main.ef3a61ec.js",
+    "runtime-main.js.map": "/Marvel-Information-portal/static/js/runtime-main.ef3a61ec.js.map",
+    "static/js/2.d3a3c84b.chunk.js": "/Marvel-Information-portal/static/js/2.d3a3c84b.chunk.js",
+    "static/js/2.d3a3c84b.chunk.js.map": "/Marvel-Information-portal/static/js/2.d3a3c84b.chunk.js.map",
+    "index.html": "/Marvel-Information-portal/index.html",
+    "static/css/main.e8826a08.chunk.css.map": "/Marvel-Information-portal/static/css/main.e8826a08.chunk.css.map",
+    "static/js/2.d3a3c84b.chunk.js.LICENSE.txt": "/Marvel-Information-portal/static/js/2.d3a3c84b.chunk.js.LICENSE.txt",
+    "static/media/error.42292aa1.gif": "/Marvel-Information-portal/static/media/error.42292aa1.gif",
+    "static/media/mjolnir.61f31e18.png": "/Marvel-Information-portal/static/media/mjolnir.61f31e18.png",
+    "static/media/thor.533e3a5e.jpeg": "/Marvel-Information-portal/static/media/thor.533e3a5e.jpeg",
+    "static/media/vision.067d4ae1.png": "/Marvel-Information-portal/static/media/vision.067d4ae1.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ef3a61ec.js",
+    "static/js/2.d3a3c84b.chunk.js",
+    "static/css/main.e8826a08.chunk.css",
+    "static/js/main.d0d9940c.chunk.js"
+  ]
+}
