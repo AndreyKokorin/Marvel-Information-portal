@@ -1,5 +1,5 @@
 
-import MarvelApi from "../marvelApi/MarvelApi";
+import { useMarvelService } from '../../service/MarvelService/useMarvelService';
 import './randomChar.scss';
 import thor from '../../resources/img/thor.jpeg';
 import mjolnir from '../../resources/img/mjolnir.png';
@@ -9,22 +9,15 @@ import Spiner from "../spiner/spiner";
 
 const RandomChar = () => {
     const [char, setChar] = useState(null);
-    const [error, setError] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const {getCharecter, loading, error} = useMarvelService()
+
+    const  getRandomCharId = () => {
+        return Math.floor(Math.random() * (1011400 - 1011000) + 1011000)
+    }
 
     async function updateChar(){
-        setLoading(true);
-        const request = new MarvelApi();
-        request.getCharecter(request.getRandomCharId())
-            .then(res => res.json())
-            .then(char => {
-                setChar(request.transformData(char.data.results));
-                setLoading(false)
-            })
-            .catch(() => {
-                setLoading(false)
-                setError(true)
-            } )
+        getCharecter(getRandomCharId())
+                                        .then((char) => setChar(char))
     }
 
     useEffect(() => {updateChar()}, [])

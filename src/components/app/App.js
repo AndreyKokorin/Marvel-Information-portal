@@ -1,27 +1,19 @@
-import { useState, useEffect } from "react";
 import AppHeader from "../appHeader/AppHeader";
-import RandomChar from "../randomChar/RandomChar";
-import CharList from "../charList/CharList";
-import CharInfo from "../charInfo/CharInfo";
-
-import decoration from '../../resources/img/vision.png';
+import ComicsPage from "../../pages/comicsPage/ComicsPage";
+import MainPage from "../../pages/mainPage/mainPage";
+import LoyoutPage from "../../pages/loyoutPage/LoyoutPage";
+import{Routes, Route} from "react-router-dom"
 
 const App = () => {
-    const [chosenCharId, setChosenCharId] = useState(null)
 
     return (
-        <div className="app">
-            <AppHeader/>
-            <main>
-                <RandomChar/>
-                <div className="char__content">
-                    <CharList onChoseCharID={setChosenCharId}/>
-                    <CharInfo chousenCharId={chosenCharId}/>
-                </div>
-                <img className="bg-decoration" src={decoration} alt="vision"/>
-            </main>
-        </div>
-    )
+                <Routes>
+                    <Route path="/" element={<LoyoutPage/>}>
+                        <Route index element={<MainPage/>}/>                
+                        <Route path="comics" element={<ComicsPage/>}/>                
+                    </Route>            
+                </Routes>                        
+    )            
 }
 
 export default App;

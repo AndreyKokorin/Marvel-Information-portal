@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './charList.scss';
+
+import {useMarvelService} from "../../service/MarvelService/useMarvelService"
 
 import RequestMarvelApi from '../marvelApi/MarvelApi';
 import Spinner from "../spiner/spiner";
@@ -7,36 +9,26 @@ import ErrorMessage from "../errorMessage/ErrorMessage"
 
 const CharList = ({onChoseCharID}) => {
     const [charecters, setCharecters] = useState([]);
-    const [limitChar, setLimitChar] = useState(6);
-    const [error, setError] = useState(false);
-    const [loading, setLoading] = useState(true)
-    
-    const requestApi = new RequestMarvelApi();
-    
+    const [offset, setOffset] = useState(0)
+    const {getCharecters, loading, error} = useMarvelService();
+
     function onGetMoreChars(){
-        setLimitChar(prev => prev + 3)
+        setOffset(prev => prev + 6)
     }
 
-    async function fetchChars (){
-        requestApi.getCharecters(limitChar)
-            .then((res) => {
-                setLoading(false);
-                return res.json()
-            })
-            .then((res) => setCharecters(requestApi.transformData(res.data.results)))
-            .catch(() => {
-                setLoading(false);
-                setError(true);
-            })
-    }
 
    useEffect( () => {
-    setLoading(true);
-    fetchChars();
-    },[limitChar])
+    getCharecters(offset).then(Chars => setCharecters(Chars));
+    onGetMoreChars();
+    },[])
+
+    function loadedNewChars(){
+        onGetMoreChars();
+        getCharecters(offset).then(newChar => setCharecters(prevChars => [...prevChars, ...newChar]))
+    }
 
     const charList = charecters.map((item,i) =>{
-        return <CharItem char={item} onChoseCharID={onChoseCharID} key={i}/>
+        return <CharItem char={item} onChoseCharID={onChoseCharID} key={item.id}/>
     } );
 
     return (
@@ -48,7 +40,7 @@ const CharList = ({onChoseCharID}) => {
             </ul>
             <button 
                 className="button button__main button__long"
-                onClick={() => onGetMoreChars()}
+                onClick={() => loadedNewChars()}
             >
                 <div className="inner">load more</div>
             </button>

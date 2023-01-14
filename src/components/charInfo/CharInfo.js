@@ -1,39 +1,26 @@
 import { useEffect , useState} from 'react';
 import './charInfo.scss';
 import thor from '../../resources/img/thor.jpeg';
-import RequestMarvelApi from '../marvelApi/MarvelApi';
+import { useMarvelService } from '../../service/MarvelService/useMarvelService';
 import Skeleton from "../skeleton/Skeleton";
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import Spinner from '../spiner/spiner';
 
 const CharInfo = ({chousenCharId}) => {
     const [charData, setCharData] = useState(null);
-    const [error, setError] = useState(false);
-    const [loading, setLoading] = useState(false)
+    const {loading, error, getCharecter} = useMarvelService() ;
 
-   const requestApi = new RequestMarvelApi();
-    
-     useEffect(() => {
-         async function fetchData(){
-            setLoading(true)
-            await requestApi.getCharecter(chousenCharId)
-                    .then(res => res.json())
-                    .then(res => {
-                        setCharData(requestApi.transformData(res.data.results));
-                        setLoading(false);
-                    })
-                    .catch(() => {
-                        setError(true);
-                        setLoading(false);
-                    })
-        }
+    const getNewChar = () => {
         if(chousenCharId != null){
-            fetchData();
+            getCharecter(chousenCharId)
+                                        .then((char) => setCharData(char))
         }
+    }
+
+     useEffect(() => {
+        getNewChar();
     }, [chousenCharId]) 
 
-
-    
     return (
         <div className="char__info">
         {(loading || charData || error) ? null : <Skeleton/>}
